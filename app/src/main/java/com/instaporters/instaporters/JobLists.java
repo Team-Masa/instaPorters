@@ -104,6 +104,10 @@ public class JobLists extends AppCompatActivity{
                 switch (direction) {
                     case 8:
                         Intent intent = new Intent(JobLists.this, NavigateToWork.class);
+                        intent.putExtra("currentLat",latitude);
+                        intent.putExtra("currentLng",longitude);
+                        intent.putExtra("jobLat",feedsList.get(position).getLat());
+                        intent.putExtra("jobLng",feedsList.get(position).getLng());
                         startActivity(intent);
                         break;
                     case 4:
@@ -111,6 +115,7 @@ public class JobLists extends AppCompatActivity{
                         lastFeedRemoved.setTime(feedsList.get(position).getTime());
                         lastFeedRemoved.setPaymentPerPorter(feedsList.get(position).getPaymentPerPorter());
                         lastFeedRemoved.setLocDetails(feedsList.get(position).getLocDetails());
+                        lastFeedRemoved.setDistance(feedsList.get(position).getDistance());
                         feedsList.remove(position);
                         recyclerView.getAdapter().notifyItemRemoved(position);
                         Snackbar.make(findViewById(R.id.listview), "Job rejected", Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
@@ -150,6 +155,8 @@ public class JobLists extends AppCompatActivity{
                         thisItem.setTime(jobObj.getString("prettyDate"));
                         thisItem.setLocDetails(jobObj.getJSONObject("location").getString("description"));
                         thisItem.setDistance(jobObj.getDouble("distance"));
+                        thisItem.setLat(jobObj.getJSONObject("location").getDouble("lat"));
+                        thisItem.setLng(jobObj.getJSONObject("location").getDouble("lng"));
                         Log.d("iuytyui", jobObj.getDouble("distance")+ "AS");
                         feedsList.add(thisItem);
                         recyclerView.getAdapter().notifyDataSetChanged();

@@ -3,6 +3,7 @@ package com.instaporters.instaporters;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -32,11 +34,20 @@ public class NavigateToWork extends Activity{
     private GoogleMap googleMap;
     ProgressDialog pDialog;
     List<LatLng> polyz;
+    Double currentLat, currentLng, jobLat, jobLng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigate_to_work);
+        Intent intent = getIntent();
+        currentLat = intent.getDoubleExtra("currentLat", 0.0);
+        currentLng = intent.getDoubleExtra("currentLng", 0.0);
+        jobLat = intent.getDoubleExtra("jobLat", 0.0);
+        jobLng = intent.getDoubleExtra("jobLng", 0.0);
+
+        Log.d("ghgh", currentLat+";"+currentLng+"#"+jobLat+";"+jobLng);
         try{
             initializeMap();
         }
@@ -49,8 +60,9 @@ public class NavigateToWork extends Activity{
 //        LatLng destination = new LatLng(12.9119126,77.6651401);
             if (googleMap == null){
                 googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(12.929648, 77.6364297), 15));
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLat, currentLng), 15));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(13), 2000, null);
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(jobLat, jobLng)).title("Unload goods"));
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                     if (Build.VERSION.SDK_INT > 22)
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -68,8 +80,8 @@ public class NavigateToWork extends Activity{
 //                Polyline polyline = googleMap.addPolyline(rectLine);
 
                 String serverKey = "AIzaSyC9BC7OsX_EaVWDMO73DA3F_P8m12wfNd0";
-                LatLng origin = new LatLng(12.971599, 77.594563);
-                LatLng destination = new LatLng(12.957167, 77.605362);
+                LatLng origin = new LatLng(currentLat, currentLng);
+                LatLng destination = new LatLng(jobLat, jobLng);
                 GoogleDirection.withServerKey(serverKey)
                         .from(origin)
                         .to(destination)
