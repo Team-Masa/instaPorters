@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.akexorcist.googledirection.DirectionCallback;
@@ -17,12 +19,18 @@ import com.akexorcist.googledirection.GoogleDirection;
 import com.akexorcist.googledirection.model.Direction;
 import com.akexorcist.googledirection.model.Step;
 import com.akexorcist.googledirection.util.DirectionConverter;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,18 +43,38 @@ public class NavigateToWork extends Activity{
     ProgressDialog pDialog;
     List<LatLng> polyz;
     Double currentLat, currentLng, jobLat, jobLng;
-
+    int jobId, porterId;
+    Button statusButton;
+    boolean start = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigate_to_work);
+        statusButton = (Button)findViewById(R.id.status);
         Intent intent = getIntent();
         currentLat = intent.getDoubleExtra("currentLat", 0.0);
         currentLng = intent.getDoubleExtra("currentLng", 0.0);
         jobLat = intent.getDoubleExtra("jobLat", 0.0);
         jobLng = intent.getDoubleExtra("jobLng", 0.0);
-
+        jobId = intent.getIntExtra("jobId", 0);
+        porterId = intent.getIntExtra("porterId", 0);
+        statusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (start) {
+                    //now stoppng
+                    Log.d("stoppingthe job", "as");
+                    stop_this_job(jobId, porterId);
+                }else {
+                    start = true;
+                    //now starting
+                    Log.d("starting the job", "as");
+                    statusButton.setText("Stop now");
+                    start_this_job(jobId, porterId);
+                }
+            }
+        });
         Log.d("ghgh", currentLat+";"+currentLng+"#"+jobLat+";"+jobLng);
         try{
             initializeMap();
@@ -125,5 +153,49 @@ public class NavigateToWork extends Activity{
     protected void onResume() {
         super.onResume();
         initializeMap();
+    }
+    void start_this_job(int jobId, int porterId) {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("porterId", porterId);
+            params.put("jobId", jobId);
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_start(), params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+    }
+    void stop_this_job(int jobId, int porterId) {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("porterId", porterId);
+            params.put("jobId", jobId);
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_end(), params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "Congratulation! you finished the job", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 }

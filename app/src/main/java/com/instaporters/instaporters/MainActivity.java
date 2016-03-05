@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,11 +28,13 @@ import java.util.List;
 
 public class MainActivity extends Activity {
     Button login_button;
+    EditText porterId;
     private String jsonResponse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        porterId = (EditText) findViewById(R.id.porter_id);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.BLACK);
         }
@@ -39,7 +42,12 @@ public class MainActivity extends Activity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            if (porterId.getText().toString().length() < 1 ){
+                Snackbar.make(findViewById(R.id.main_container), "Porter Id is mandatory!", Snackbar.LENGTH_LONG).show();
+                return;
+            }
              Intent intent = new Intent(MainActivity.this, JobLists.class);
+                intent.putExtra("porterId", Integer.parseInt(porterId.getText().toString()));
                 startActivity(intent);
             }
         });

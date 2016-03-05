@@ -2,6 +2,7 @@ package com.instaporters.instaporters;
 
 import android.*;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.http.RequestQueue;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,10 +29,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +56,7 @@ public class JobLists extends AppCompatActivity{
     public static String[] detail = {"2016-03-05T19:11:46.410Z"};
     Context context;
     double longitude, latitude;
+    int porterId;
 
     @Override
     protected void onResume() {
@@ -63,6 +70,8 @@ public class JobLists extends AppCompatActivity{
         getSupportActionBar().show();
         getSupportActionBar().setTitle("New Job offers");
         setContentView(R.layout.job_lists);
+        porterId = getIntent().getIntExtra("porterId", 12);
+        Log.d("Porterid", porterId + " o");
         recyclerView = (RecyclerView) findViewById(R.id.listview);
         context = this;
         feedsList = new ArrayList<>();
@@ -70,6 +79,7 @@ public class JobLists extends AppCompatActivity{
             FeedItem item = new FeedItem();
             item.setPaymentPerPorter(title[i]);
             item.setTime("12");
+            item.setJobId(1);
             item.setLocDetails(detail[i]);
             item.setDistance(12.3);
             feedsList.add(item);
@@ -103,8 +113,11 @@ public class JobLists extends AppCompatActivity{
                 final int position = viewHolder.getAdapterPosition();
                 switch (direction) {
                     case 8:
+                        acceptJob(feedsList.get(position).getJobId(), porterId);
                         Intent intent = new Intent(JobLists.this, NavigateToWork.class);
+                        intent.putExtra("jobId",feedsList.get(position).getJobId());
                         intent.putExtra("currentLat",latitude);
+                        intent.putExtra("porterId", porterId);
                         intent.putExtra("currentLng",longitude);
                         intent.putExtra("jobLat",feedsList.get(position).getLat());
                         intent.putExtra("jobLng",feedsList.get(position).getLng());
@@ -112,6 +125,7 @@ public class JobLists extends AppCompatActivity{
                         break;
                     case 4:
                         final FeedItem lastFeedRemoved = new FeedItem();
+                        lastFeedRemoved.setJobId(feedsList.get(position).getJobId());
                         lastFeedRemoved.setTime(feedsList.get(position).getTime());
                         lastFeedRemoved.setPaymentPerPorter(feedsList.get(position).getPaymentPerPorter());
                         lastFeedRemoved.setLocDetails(feedsList.get(position).getLocDetails());
@@ -133,7 +147,28 @@ public class JobLists extends AppCompatActivity{
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
-
+    void acceptJob(int jobId, int porterId) {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("porterId", porterId);
+            params.put("jobId", jobId);
+        }catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.assign_job_to_porter(), params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), "This job is yours!", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+    }
     private void makeJsonArrayRequest() {
         Log.d("psssse", longitude+";"+latitude);
 //        double lat = 12.9312263;
@@ -151,6 +186,7 @@ public class JobLists extends AppCompatActivity{
                     for (int i = 0; i < response.length(); i++) {
                         FeedItem thisItem = new FeedItem();
                         JSONObject jobObj = (JSONObject) response.get(i);
+                        thisItem.setJobId(jobObj.getInt("jobId"));
                         thisItem.setPaymentPerPorter(jobObj.getInt("paymentPerPorter"));
                         thisItem.setTime(jobObj.getString("prettyDate"));
                         thisItem.setLocDetails(jobObj.getJSONObject("location").getString("description"));

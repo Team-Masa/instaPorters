@@ -4,6 +4,16 @@ package com.instaporters.instaporters;
  * Created by maheshkumar on 3/5/16.
  */
 public class FeedItem {
+    int jobId;
+
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
     String time;
     int paymentPerPorter;
     String locDetails;
