@@ -1,6 +1,7 @@
 package com.instaporters.instaporters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,49 +10,42 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 /**
  * Created by maheshkumar on 3/5/16.
  */
-public class CustomAdapter extends BaseAdapter {
-    String [] title;
-    String [] detail;
-    Context context;
-    private static LayoutInflater inflater = null;
-    public CustomAdapter(JobLists jobLists, String[] title, String[] detail) {
-        this.title = title;
-        this.detail = detail;
-        context = jobLists;
-        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+    private List<FeedItem> feedItemList;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, detail;
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            detail = (TextView) view.findViewById(R.id.detail);
+        }
+
+    }
+    public CustomAdapter(List<FeedItem> feeds) {
+        this.feedItemList = feeds;
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.jobs_details, parent, false);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        FeedItem item = feedItemList.get(position);
+        holder.title.setText(item.getTitle());
+        holder.detail.setText(item.getDetail());
     }
 
     @Override
-    public int getCount() {
-        return title.length;
-    }
-    public class Holder {
-        TextView title;
-        TextView detail;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Holder holder= new Holder();
-        View rowView;
-        rowView = inflater.inflate(R.layout.jobs_details, null);
-        holder.title = (TextView) rowView.findViewById(R.id.title);
-        holder.detail = (TextView) rowView.findViewById(R.id.detail);
-        holder.title.setText(title[position]);
-        holder.detail.setText(detail[position]);
-        return rowView;
+    public int getItemCount() {
+        return feedItemList.size();
     }
 }

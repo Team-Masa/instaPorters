@@ -6,11 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/listview_title_offers"/>
-<ListView
+<android.support.v7.widget.RecyclerView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/listview"
+    android:scrollbars="vertical"
     android:divider="@android:color/transparent"
     android:dividerHeight="16dp">
-</ListView>
+</android.support.v7.widget.RecyclerView>
 </LinearLayout>
