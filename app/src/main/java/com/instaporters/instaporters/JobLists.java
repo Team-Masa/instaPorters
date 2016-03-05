@@ -24,8 +24,8 @@ public class JobLists extends AppCompatActivity{
     RecyclerView recyclerView;
     CustomAdapter adapter;
     private List<FeedItem> feedsList;
-    public static String[] title = {"t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"};
-    public static String[] detail = {"d1", "d2", "d3", "d4", "d5", "t6", "t7", "t8"};
+    public static String[] title = {"500", "200", "550", "600", "300", "800", "200", "400"};
+    public static String[] detail = {"5 Km", "8 Km", "1 Km", "10 Km", "5 Km", "3 Km", "1 Km", "1 Km"};
     Context context;
 
     @Override
