@@ -20,12 +20,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private List<FeedItem> feedItemList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, detail, time;
+        public TextView title, detail, time, distance;
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             detail = (TextView) view.findViewById(R.id.detail);
             time = (TextView) view.findViewById(R.id.time);
+            distance = (TextView) view.findViewById(R.id.distance);
         }
 
     }
@@ -43,6 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         FeedItem item = feedItemList.get(position);
         holder.title.setText(Integer.toString(item.getPaymentPerPorter()));
+        holder.distance.setText(Double.toString(item.getDistance())+ " Km");
         holder.detail.setText(item.getLocDetails());
         holder.time.setText(item.getTime());
     }

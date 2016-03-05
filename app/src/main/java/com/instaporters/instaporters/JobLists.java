@@ -1,14 +1,21 @@
 package com.instaporters.instaporters;
 
+import android.*;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,6 +49,7 @@ public class JobLists extends AppCompatActivity{
     public static int[] title = {500};
     public static String[] detail = {"2016-03-05T19:11:46.410Z"};
     Context context;
+    double longitude, latitude;
 
     @Override
     protected void onResume() {
@@ -63,11 +71,26 @@ public class JobLists extends AppCompatActivity{
             item.setPaymentPerPorter(title[i]);
             item.setTime("12");
             item.setLocDetails(detail[i]);
+            item.setDistance(12.3);
             feedsList.add(item);
         }
         adapter = new CustomAdapter(feedsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if (Build.VERSION.SDK_INT > 22)
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (location!=null){
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+        }
+
+
+
         makeJsonArrayRequest();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT){
             @Override
@@ -105,8 +128,16 @@ public class JobLists extends AppCompatActivity{
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
+
     private void makeJsonArrayRequest() {
-        JsonArrayRequest req = new JsonArrayRequest(ApiUrl.get_all_jobs(), new Response.Listener<JSONArray>() {
+        Log.d("psssse", longitude+";"+latitude);
+//        double lat = 12.9312263;
+//        double lon = 77.632554;
+        double lat = latitude;
+        double lon = longitude;
+        Log.d("assign", longitude+";"+latitude);
+
+        JsonArrayRequest req = new JsonArrayRequest(ApiUrl.get_all_jobs()+"lat="+lat+"&lng="+lon, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -116,8 +147,10 @@ public class JobLists extends AppCompatActivity{
                         FeedItem thisItem = new FeedItem();
                         JSONObject jobObj = (JSONObject) response.get(i);
                         thisItem.setPaymentPerPorter(jobObj.getInt("paymentPerPorter"));
-                        thisItem.setTime(jobObj.getString("time"));
+                        thisItem.setTime(jobObj.getString("prettyDate"));
                         thisItem.setLocDetails(jobObj.getJSONObject("location").getString("description"));
+                        thisItem.setDistance(jobObj.getDouble("distance"));
+                        Log.d("iuytyui", jobObj.getDouble("distance")+ "AS");
                         feedsList.add(thisItem);
                         recyclerView.getAdapter().notifyDataSetChanged();
                     }
@@ -144,4 +177,5 @@ public class JobLists extends AppCompatActivity{
         });
         AppController.getInstance().addToRequestQueue(req);
     }
+
 }

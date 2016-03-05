@@ -5,6 +5,6 @@ package com.instaporters.instaporters;
  */
 public class ApiUrl {
     public static String get_all_jobs() {
-        return "http://192.168.6.174:1337/unassigned-jobs";
+        return "http://192.168.6.174:1337/unassigned-jobs?";
     }
 }

@@ -7,6 +7,16 @@ public class FeedItem {
     String time;
     int paymentPerPorter;
     String locDetails;
+    double distance;
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getDistance() {
+
+        return distance;
+    }
 
     public void setTime(String time) {
         this.time = time;
