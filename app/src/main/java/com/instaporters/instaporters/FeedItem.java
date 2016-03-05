@@ -4,23 +4,32 @@ package com.instaporters.instaporters;
  * Created by maheshkumar on 3/5/16.
  */
 public class FeedItem {
-    String title;
-    String detail;
+    String time;
+    int paymentPerPorter;
+    String locDetails;
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setPaymentPerPorter(int paymentPerPorter) {
+        this.paymentPerPorter = paymentPerPorter;
     }
 
-    public String getTitle() {
-
-        return title;
+    public void setLocDetails(String locDetails) {
+        this.locDetails = locDetails;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getTime() {
+
+        return time;
+    }
+
+    public int getPaymentPerPorter() {
+        return paymentPerPorter;
+    }
+
+    public String getLocDetails() {
+        return locDetails;
     }
 }
