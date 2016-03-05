@@ -2,6 +2,7 @@ package com.instaporters.instaporters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by maheshkumar on 3/5/16.
  */
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder>{
     private List<FeedItem> feedItemList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -48,4 +49,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public int getItemCount() {
         return feedItemList.size();
     }
+
 }
