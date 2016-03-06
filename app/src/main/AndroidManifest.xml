@@ -37,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".JobLists"></activity>
+        <activity android:name=".StopJob"></activity>
         <activity android:name=".NavigateToWork"></activity>
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDwYfFmyMhVd5e9LOsvSkuOgewd2WEztFg"></meta-data>

@@ -66,6 +66,8 @@ public class NavigateToWork extends Activity{
                     //now stoppng
                     Log.d("stoppingthe job", "as");
                     stop_this_job(jobId, porterId);
+                    Intent intent = new Intent(NavigateToWork.this, StopJob.class);
+                    startActivity(intent);
                 }else {
                     start = true;
                     //now starting
