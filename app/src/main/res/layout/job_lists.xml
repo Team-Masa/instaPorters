@@ -29,7 +29,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="#FFF"
                     android:layout_toRightOf="@+id/swipeLeftIcon"
-                    android:text="Swipe Left to reject"
+                    android:text="@string/swipeleft"
                     android:textSize="24dp" />
                 <ImageView
                     android:layout_centerVertical="true"
@@ -59,7 +59,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="#FFF"
                     android:layout_toRightOf="@+id/swipeRightIcon"
-                    android:text="Swipe Right to accept"
+                    android:text="@string/swiperight"
                     android:textSize="24dp" />
             </RelativeLayout>
             <RelativeLayout
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="Got it!"
+                    android:text="@string/gotit"
                     android:onClick="fadeTutorial"/>
             </RelativeLayout>
         </RelativeLayout>

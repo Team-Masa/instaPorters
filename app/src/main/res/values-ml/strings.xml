@@ -10,4 +10,11 @@
     <string name="login">ലോഗിൻ</string>
     <string name="listview_title_offers">പുതിയ ജോലി വാഗ്ദാനം</string>
     <string name="action_settings">ക്രമീകരണങ്ങൾ</string>
+    <string name="searchmore">കൂടുതൽ ജോലികൾ തിരയുക!</string>
+    <string name="startnow"> ഇപ്പോൾ ആരംഭിക്കുക</string>
+    <string name="swipeleft">സ്വൈപ്പ് തള്ളിക്കളയാൻ</string>
+    <string name="swiperight">സ്വീകരിക്കുന്നതിന് അവകാശം സ്വൈപ്</string>
+    <string name="thankyou"> നന്ദി! \ n വിജയകരമായി നിങ്ങളുടെ ജോലി പൂർത്തിയാക്കി</string>
+    <string name="gotit">മനസ്സിലായി!</string>
+    <string name="enter_name">നിങ്ങളുടെ പേര് നൽകുക</string>
 </resources>

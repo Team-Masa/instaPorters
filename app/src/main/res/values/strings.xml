@@ -11,4 +11,16 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="navigation">Navigation</string>
+    <string name="swipeleft">Swipe Left to reject</string>
+    <string name="swiperight">Swipe Right to accept</string>
+    <string name="gotit">Got it!</string>
+    <string name="startnow">Start Now</string>
+    <string name="searchmore">Search more jobs!</string>
+    <string name="thankyou">Thank you!\nYou have successfully finished your job.</string>
+    <string name="new_job_offers">New Job offers</string>
+    <string name="job_rejeected">Job rejected</string>
+    <string name="undo">UNDO</string>
+    <string name="job_restored">Job is restored!</string>
+    <string name="job_is_yours">This job is yours!</string>
+    <string name="no_internet">No internet Access, Check your internet connection.</string>
 </resources>

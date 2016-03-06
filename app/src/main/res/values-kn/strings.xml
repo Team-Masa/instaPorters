@@ -10,4 +10,17 @@
     <string name="number_hint_placeholder">ಮೊಬೈಲ್ ನಂಬರ </string>
     <string name="register">ನೋಂದಣಿ</string>
     <string name="register_button">ನೋಂದಣಿ</string>
+    <string name="searchmore">ಹೆಚ್ಚು ಉದ್ಯೋಗಗಳು ಹುಡುಕಲು !</string>
+    <string name="startnow">ಈಗ ಪ್ರಾರಂಭಿಸಿ</string>
+    <string name="swiperight">ಸ್ವೀಕರಿಸಲು ಸ್ವೈಪ್ ರೈಟ್</string>
+    <string name="swipeleft"> ತಿರಸ್ಕರಿಸಲು ಎಡಕ್ಕೆ ಸ್ವೈಪ್</string>
+    <string name="thankyou"> ಧನ್ಯವಾದಗಳು! \ n ಯಶಸ್ವಿಯಾಗಿ ನಿಮ್ಮ ಕೆಲಸ ಪೂರ್ಣಗೊಳಿಸಿದ .</string>
+    <string name="gotit">ಅರ್ಥವಾಯಿತು!</string>
+    <string name="enter_name"> ನಿಮ್ಮ ಹೆಸರನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="undo"> ರದ್ದು</string>
+    <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಪ್ರವೇಶ , ನಿಮ್ಮ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರೀಕ್ಷಿಸಿ.</string>
+    <string name="new_job_offers"> ಹೊಸ ಜಾಬ್ ಕೊಡುಗೆಗಳನ್ನು</string>
+    <string name="job_restored">ಜಾಬ್ ಪುನಃಸ್ಥಾಪಿಸಲು ಇದೆ! </string>
+    <string name="job_rejeected">ಜಾಬ್ ತಿರಸ್ಕರಿಸಿದರು </string>
+    <string name="job_is_yours">ಈ ಕೆಲಸ ನಿಮ್ಮದೇ! </string>
 </resources>

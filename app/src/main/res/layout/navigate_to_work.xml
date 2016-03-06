@@ -23,6 +23,6 @@
         android:textColor="#FFF"
         android:layout_alignParentBottom="true"
 
-        android:text="Start Now"/>
+        android:text="@string/startnow"/>
 
 </RelativeLayout>

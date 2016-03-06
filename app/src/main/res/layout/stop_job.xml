@@ -16,7 +16,7 @@
         android:textSize="18dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/thankyou_msg"
-        android:text="Thank you!\nYou have successfully finished your job."
+        android:text="@string/thankyou"
         />
     <Button
         android:layout_width="match_parent"
@@ -26,5 +26,5 @@
         android:paddingTop="10dp"
         android:id="@+id/moreJobs"
     android:layout_below="@+id/thankyou_msg"
-        android:text="Search more jobs!"/>
+        android:text="@string/searchmore"/>
 </RelativeLayout>

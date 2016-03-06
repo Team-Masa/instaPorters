@@ -1,23 +1,14 @@
 package com.instaporters.instaporters;
 
-import android.*;
-import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.http.RequestQueue;
-import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,9 +18,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -39,8 +27,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +58,7 @@ public class JobLists extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().show();
-        getSupportActionBar().setTitle("New Job offers");
+        getSupportActionBar().setTitle(R.string.new_job_offers);
         setContentView(R.layout.job_lists);
         porterId = getIntent().getIntExtra("porterId", 12);
         Log.d("Porterid", porterId + " o");
@@ -150,10 +136,10 @@ public class JobLists extends AppCompatActivity{
                         lastFeedRemoved.setDistance(feedsList.get(position).getDistance());
                         feedsList.remove(position);
                         recyclerView.getAdapter().notifyItemRemoved(position);
-                        Snackbar.make(findViewById(R.id.listview), "Job rejected", Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
+                        Snackbar.make(findViewById(R.id.listview), R.string.job_rejeected, Snackbar.LENGTH_LONG).setAction(R.string.undo, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Snackbar.make(findViewById(R.id.listview), "Job is restored!", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(findViewById(R.id.listview), R.string.job_restored, Snackbar.LENGTH_LONG).show();
                                 feedsList.add(position, lastFeedRemoved);
                                 recyclerView.getAdapter().notifyDataSetChanged();
                             }
@@ -178,7 +164,7 @@ public class JobLists extends AppCompatActivity{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.assign_job_to_porter(), params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "This job is yours!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.job_is_yours, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -229,7 +215,7 @@ public class JobLists extends AppCompatActivity{
                 VolleyLog.d("RAG", "Error: " + error.getMessage());
 
                 if (error instanceof NoConnectionError) {
-                    errorMsg = "No internet Access, Check your internet connection.";
+                    errorMsg = getString(R.string.no_internet);
                 } else {
                     errorMsg = error.getMessage();
                 }
