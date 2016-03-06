@@ -23,4 +23,10 @@
     <string name="job_restored">Job is restored!</string>
     <string name="job_is_yours">This job is yours!</string>
     <string name="no_internet">No internet Access, Check your internet connection.</string>
+    <string name="start_track">We started the tracking</string>
+    <string name="finished_the_job">Congratulation! you finished the job</string>
+    <string name="no_maps_sorry">No maps sorry</string>
+    <string name="stop_now">Stop now</string>
+    <string name="unload_goods">Unload goods</string>
+    <string name="id_mandatory">Porter Id is mandatory!</string>
 </resources>

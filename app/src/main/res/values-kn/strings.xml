@@ -23,4 +23,10 @@
     <string name="job_restored">ಜಾಬ್ ಪುನಃಸ್ಥಾಪಿಸಲು ಇದೆ! </string>
     <string name="job_rejeected">ಜಾಬ್ ತಿರಸ್ಕರಿಸಿದರು </string>
     <string name="job_is_yours">ಈ ಕೆಲಸ ನಿಮ್ಮದೇ! </string>
+    <string name="finished_the_job">ಅಭಿನಂದನೆ ! ನೀವು ಕೆಲಸ ಮುಗಿದ</string>
+    <string name="no_maps_sorry">ಯಾವುದೇ ನಕ್ಷೆಗಳು ಕ್ಷಮಿಸಿ</string>
+    <string name="start_track"> ನಾವು ಟ್ರಾಕಿಂಗ್ ಆರಂಭಿಸಿದರು</string>
+    <string name="stop_now">ಈಗ ನಿಲ್ಲಿಸಿ </string>
+    <string name="unload_goods">ಸರಕುಗಳ ಇಳಿಸುವುದನ್ನು </string>
+    <string name="id_mandatory">ಪೋರ್ಟರ್ ಐಡಿ ಕಡ್ಡ</string>
 </resources>

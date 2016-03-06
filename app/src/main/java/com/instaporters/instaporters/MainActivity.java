@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
             if (porterId.getText().toString().length() < 1 ){
-                Snackbar.make(findViewById(R.id.main_container), "Porter Id is mandatory!", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.main_container), R.string.id_mandatory, Snackbar.LENGTH_LONG).show();
                 return;
             }
              Intent intent = new Intent(MainActivity.this, JobLists.class);
@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         });
 
         Spinner dropdown = (Spinner)findViewById(R.id.languageSpinner);
-        String[] items = new String[]{"en", "hi", "ml","kn"};
+        String[] items = new String[]{"en", "hi","kn"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setSelection(0,false);

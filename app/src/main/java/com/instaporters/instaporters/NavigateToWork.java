@@ -72,7 +72,7 @@ public class NavigateToWork extends Activity{
                     start = true;
                     //now starting
                     Log.d("starting the job", "as");
-                    statusButton.setText("Stop now");
+                    statusButton.setText(R.string.stop_now);
                     statusButton.setBackgroundColor(Color.parseColor("#c40b0b"));
                     start_this_job(jobId, porterId);
                 }
@@ -93,7 +93,7 @@ public class NavigateToWork extends Activity{
                 googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLat, currentLng), 15));
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(13), 2000, null);
-                googleMap.addMarker(new MarkerOptions().position(new LatLng(jobLat, jobLng)).title("Unload goods"));
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(jobLat, jobLng)).title(getString(R.string.unload_goods)));
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
                     if (Build.VERSION.SDK_INT > 22)
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -142,7 +142,7 @@ public class NavigateToWork extends Activity{
                         });
 
                 if (googleMap == null) {
-                    Toast.makeText(getApplicationContext(), "No maps sorry", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.no_maps_sorry, Toast.LENGTH_LONG).show();
                 }
             }
     }
@@ -165,7 +165,7 @@ public class NavigateToWork extends Activity{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_start(), params,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "We started the tranking", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.start_track, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -187,7 +187,7 @@ public class NavigateToWork extends Activity{
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_end(), params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Congratulation! you finished the job", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.finished_the_job, Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override

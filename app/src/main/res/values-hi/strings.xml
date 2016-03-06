@@ -24,4 +24,10 @@
     <string name="job_restored">नौकरी बहाल कर रहा है !</string>
     <string name="job_rejeected">नौकरी को अस्वीकार कर दिया </string>
     <string name="job_is_yours">यह काम तुम्हारा है!</string>
+    <string name="finished_the_job">बधाई हो! आप काम समाप्त हो गया</string>
+    <string name="no_maps_sorry">कोई नक्शा नहीं खेद</string>
+    <string name="start_track">हम ट्रैकिंग शुरू कर दिया</string>
+    <string name="stop_now">अब बंद करो</string>
+    <string name="unload_goods"> माल अनलोड</string>
+    <string name="id_mandatory"> पोर्टर पहचान पत्र अनिवार्य है !</string>
 </resources>
