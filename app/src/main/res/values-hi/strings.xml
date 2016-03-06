@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Insta Porters</string>
+    <string name="google_app_id" translatable="false"></string>
+    <string name="action_settings">सेटिंग</string>
+    <string name="listview_title_offers">न्यू नौकरी की पेशकश</string>
+    <string name="login">लॉगिन</string>
+    <string name="login_button">लॉगिन</string>
+    <string name="login_placeholder">खाता संख्या</string>
+    <string name="navigation">पथ प्रदर्शन </string>
+    <string name="number_hint_placeholder">मोबाइल नंबर </string>
+    <string name="register">रजिस्टर</string>
+    <string name="register_button">रजिस्टर</string>
+</resources>

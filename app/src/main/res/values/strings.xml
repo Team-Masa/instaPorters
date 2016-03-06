@@ -5,5 +5,9 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
     <string name="listview_title_offers">New job offers</string>
-    <string name="google_app_id">AIzaSyDwYfFmyMhVd5e9LOsvSkuOgewd2WEztFg</string>
+    <string name="google_app_id" translatable="false">AIzaSyDwYfFmyMhVd5e9LOsvSkuOgewd2WEztFg</string>
+    <string name="number_hint_placeholder">Mobile Number</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="navigation">Navigation</string>
 </resources>

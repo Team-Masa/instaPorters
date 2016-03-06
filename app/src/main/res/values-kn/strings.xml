@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Insta Porters</string>
+    <string name="action_settings">ಸೆಟ್ಟಿಂಗ್ಗಳು</string>
+    <string name="listview_title_offers">ಹೊಸ ಕೆಲಸ ಕೊಡುಗೆಗಳನ್ನು </string>
+    <string name="login">ಲಾಗಿನ್ </string>
+    <string name="login_button">ಲಾಗಿನ್ </string>
+    <string name="login_placeholder">ಖಾತೆ ಸಂಖ್ಯೆ </string>
+    <string name="navigation">ಸಂಚರಣೆ </string>
+    <string name="number_hint_placeholder">ಮೊಬೈಲ್ ನಂಬರ </string>
+    <string name="register">ನೋಂದಣಿ</string>
+    <string name="register_button">ನೋಂದಣಿ</string>
+</resources>
