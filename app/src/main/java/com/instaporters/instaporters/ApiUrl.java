@@ -16,4 +16,7 @@ public class ApiUrl {
     public static String porter_end() {
         return "http://192.168.6.174:1337/porter-end";
     }
+    public static String porters() {
+        return "http://192.168.6.174:1337/porters";
+    }
 }

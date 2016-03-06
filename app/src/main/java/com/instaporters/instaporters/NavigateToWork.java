@@ -141,10 +141,6 @@ public class NavigateToWork extends Activity{
                             }
                         });
 
-
-
-
-
                 if (googleMap == null) {
                     Toast.makeText(getApplicationContext(), "No maps sorry", Toast.LENGTH_LONG).show();
                 }
@@ -166,10 +162,10 @@ public class NavigateToWork extends Activity{
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_start(), params, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiUrl.porter_start(), params,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "We started the tranking", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override

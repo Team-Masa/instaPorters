@@ -39,6 +39,14 @@ public class MainActivity extends Activity {
             getWindow().setStatusBarColor(Color.BLACK);
         }
         login_button = (Button) findViewById(R.id.login_button);
+        Button registerButton = (Button) findViewById(R.id.register);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Registration.class);
+                startActivity(intent);
+            }
+        });
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -60,7 +60,7 @@ public class JobLists extends AppCompatActivity{
     public static String[] detail = {"2016-03-05T19:11:46.410Z"};
     Context context;
     double longitude, latitude;
-    int porterId;
+    int porterId, distance;
 
     @Override
     protected void onResume() {
@@ -131,7 +131,7 @@ public class JobLists extends AppCompatActivity{
                 final int position = viewHolder.getAdapterPosition();
                 switch (direction) {
                     case 8:
-                        acceptJob(feedsList.get(position).getJobId(), porterId);
+                        acceptJob(feedsList.get(position).getJobId(), porterId, feedsList.get(position).getDistance());
                         Intent intent = new Intent(JobLists.this, NavigateToWork.class);
                         intent.putExtra("jobId",feedsList.get(position).getJobId());
                         intent.putExtra("currentLat",latitude);
@@ -165,11 +165,12 @@ public class JobLists extends AppCompatActivity{
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
-    void acceptJob(int jobId, int porterId) {
+    void acceptJob(int jobId, int porterId, double distance) {
         JSONObject params = new JSONObject();
         try {
             params.put("porterId", porterId);
             params.put("jobId", jobId);
+            params.put("distance", distance);
         }catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
