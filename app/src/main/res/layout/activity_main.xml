@@ -12,18 +12,31 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.instaporters.instaporters.MainActivity"
     tools:showIn="@layout/activity_main"
-    android:background="@drawable/blackbg">
-
+    android:background="@drawable/truck">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Insta Porters"
+        android:textColor="#FFF"
+        android:textSize="42dp"
+        android:fontFamily="sans-serif-thin"
+        android:layout_marginBottom="20dp"
+        android:shadowColor="#000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.2"
+        android:shadowRadius="1.9"
+        android:textAlignment="center"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="180dp"
+            android:layout_height="220dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/twitter_logo_blue"/>
+            android:src="@drawable/truck_icon"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,13 +45,15 @@
             android:textColor="#FFF"
             android:id="@+id/porter_id"
             android:inputType="number"
+            android:background="#a1000000"
             android:layout_marginBottom="20dp"
-            android:paddingLeft="20dp"/>
+            android:padding="10dp"
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_button"
-            android:textColor="@color/colorAccent"
+            android:textColor="#FFF"
             android:background="@drawable/rounded_button_bg"
             android:layout_marginBottom="20dp"
             android:id="@+id/login_button"
@@ -47,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button_bg"
-            android:textColor="@color/colorAccent"
+            android:textColor="#FFF"
             android:text="@string/register_button"/>
 
     </LinearLayout>

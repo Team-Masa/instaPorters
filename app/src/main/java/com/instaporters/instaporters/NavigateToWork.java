@@ -71,6 +71,7 @@ public class NavigateToWork extends Activity{
                     //now starting
                     Log.d("starting the job", "as");
                     statusButton.setText("Stop now");
+                    statusButton.setBackgroundColor(Color.parseColor("#c40b0b"));
                     start_this_job(jobId, porterId);
                 }
             }

@@ -3,5 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="card_bg">#FFF</color>
+    <color name="card_bg">#4dFFFFFF</color>
+    <color name="blue_icon">#306EA3</color>
 </resources>

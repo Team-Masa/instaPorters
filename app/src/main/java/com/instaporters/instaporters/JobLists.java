@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.http.RequestQueue;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +26,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -109,6 +113,20 @@ public class JobLists extends AppCompatActivity{
             }
 
             @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                if (dX > 0) {
+                    Log.d("Posit", "pp;  " +dX + "," +dY);
+                    viewHolder.itemView.setBackgroundColor(Color.GREEN);
+                }else if (dX < 0){
+                    Log.d("Posit", "pp;  " +dX + "," +dY);
+                    viewHolder.itemView.setBackgroundColor(Color.RED);
+                }else
+                    viewHolder.itemView.setBackgroundColor(Color.parseColor("#4dFFFFFF"));
+
+            }
+
+            @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 final int position = viewHolder.getAdapterPosition();
                 switch (direction) {
@@ -177,7 +195,7 @@ public class JobLists extends AppCompatActivity{
         double lon = longitude;
         Log.d("assign", longitude+";"+latitude);
 
-        JsonArrayRequest req = new JsonArrayRequest(ApiUrl.get_all_jobs()+"lat="+lat+"&lng="+lon, new Response.Listener<JSONArray>() {
+        JsonArrayRequest req = new JsonArrayRequest(ApiUrl.get_all_jobs()+"lat="+lat+"&lng="+lon+"&porterId="+porterId, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
@@ -219,6 +237,10 @@ public class JobLists extends AppCompatActivity{
             }
         });
         AppController.getInstance().addToRequestQueue(req);
+    }
+    public void fadeTutorial(View view) {
+        FrameLayout tutrial_overlay = (FrameLayout) findViewById(R.id.tutrial_overlay);
+        tutrial_overlay.setVisibility(View.GONE);
     }
 
 }
